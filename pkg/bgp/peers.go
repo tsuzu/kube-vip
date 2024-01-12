@@ -40,6 +40,25 @@ func (b *Server) AddPeer(peer Peer) (err error) {
 			RemoteAddress: peer.Address,
 			RemotePort:    uint32(179),
 		},
+
+		AfiSafis: []*api.AfiSafi{
+			{
+				Config: &api.AfiSafiConfig{
+					Family: &api.Family{
+						Afi:  api.Family_AFI_IP,
+						Safi: api.Family_SAFI_UNICAST,
+					},
+				},
+			},
+			{
+				Config: &api.AfiSafiConfig{
+					Family: &api.Family{
+						Afi:  api.Family_AFI_IP6,
+						Safi: api.Family_SAFI_UNICAST,
+					},
+				},
+			},
+		},
 	}
 
 	if b.c.SourceIP != "" {
